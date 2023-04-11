@@ -11,7 +11,7 @@ w = pt - v1;
 % projection of w onto v
 c = dot(w,v) / norm(v)^2;
 
-% closest point on the line segment to pt nmnm
+% closest point on the line segment to pt 
 if c <= 0
     closestPt = v1;
 elseif c >= 1
