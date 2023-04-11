@@ -1,0 +1,24 @@
+function newGBur = updateGBur(GBur,ylp_point,dc)
+
+
+root = GBur.Nodes(1,:);
+
+%find new point along the direction of spine
+
+direction_vector = root - ylp_point;
+
+norm = sqrt(sum(direction_vector.^2,2));
+unit_vector = direction_vector./norm;
+
+offset = unit_vector*dc;
+
+new_point = currentNode + offset;
+
+%add new point to bur
+newGBur = addnode(GBur,1);
+
+newGBur = addedge(GBur,ylp,)
+
+
+end
+
