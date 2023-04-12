@@ -1,4 +1,4 @@
-function [endpoint,node] = findEndpoint(GBur,root, i)
+function [endpoint,node] = findEndpoint(gbur,root, i)
 
 %  METHOD 1 ---> using Adjacency Matrix
 % 
@@ -34,15 +34,15 @@ function [endpoint,node] = findEndpoint(GBur,root, i)
 
 % METHOD 2 using succesor function
 
-endpoint = find_root_id(GBur,root); %initialise endpoint to root
-root_child = successors(GBur,endpoint);
+endpoint = find_root_id(gbur,root); %initialise endpoint to root
+root_child = successors(gbur,endpoint);
 
 if ~isempty(root_child)
     endpoint = root_child(i);
 end
 
 while true
-    children = successors(GBur,endpoint);
+    children = successors(gbur,endpoint);
     if ~isempty(children)
         endpoint = children(1);
     else
@@ -52,7 +52,7 @@ while true
 
 end
 
-req_point = GBur.Nodes(endpoint,:); %the required point is in table format so return it in double
+req_point = gbur.Nodes(endpoint,:); %the required point is in table format so return it in double
 
 if(isa(req_point,'table'))
     node = [req_point.XData(1),req_point.YData(1)];

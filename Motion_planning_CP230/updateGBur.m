@@ -1,4 +1,4 @@
-function GBur = updateGBur(GBur,root,node_id,node,dc)
+function gbur = updateGBur(gbur,root,node_id,node,dc)
 
 
 
@@ -8,14 +8,14 @@ direction = (node - root) / norm(node - root);
 new_point = node + direction * dc;
 
 %add new point to bur
-GBur = addnode(GBur,1);
+gbur = addnode(gbur,1);
 
-new_Node_id = numnodes(GBur);
+new_Node_id = numnodes(gbur);
 
-GBur = addedge(GBur,node_id,new_Node_id);
+gbur = addedge(gbur,node_id,new_Node_id);
 
-GBur.Nodes.XData(new_Node_id) = new_point(1,1);
-GBur.Nodes.YData(new_Node_id) = new_point(1,2);
+gbur.Nodes.XData(new_Node_id) = new_point(1,1);
+gbur.Nodes.YData(new_Node_id) = new_point(1,2);
 
 end
 
