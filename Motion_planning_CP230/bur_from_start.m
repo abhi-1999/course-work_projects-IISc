@@ -5,7 +5,10 @@ nodes_to_add = numnodes(GBur);
 
 GBur_start = addnode(GBur_start,nodes_to_add);
 
-GBur_start.Nodes.XData(n+1:numnodes(GBur_start)) = GBur()
+%####################IMPORTANT############################
+% root in GBur will already be there in GBur_start need to resolve this
+
+GBur_start.Nodes.XData(n+1:numnodes(GBur_start)) = GBur()  
 
 end
 
