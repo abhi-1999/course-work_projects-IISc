@@ -1,4 +1,4 @@
-function PATH(GBur,points_ss,nearest_point_idx)
+function path(GBur,points_ss,nearest_point_idx)
 %STEP1 ---> add the path from root to the nearest point to a new graph
     pred_list = nearest_point_idx;
     cur_par_id=nearest_point_idx;
