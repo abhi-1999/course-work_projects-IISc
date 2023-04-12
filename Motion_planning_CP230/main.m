@@ -19,7 +19,7 @@ GBur = generalised_bur(q,k,thr_hold,map);
 if isempty(polyxpoly(map.obsx,map.obsx,[goal(1),nearest_point(1)],[goal(2),nearest_point(2)]))
     [flag,points_ss]=singlespinebur(map,goal,nearest_point,k,epsilon);
     if flag ==  1
-        path(GBur,points_ss,nearest_point_idx);
+        path(GBur,points_ss,nearest_point_idx); %plot the path 
     end
 
 end
