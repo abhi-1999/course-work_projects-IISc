@@ -34,7 +34,7 @@ function [endpoint,node] = findEndpoint(gbur,root, i)
 
 % METHOD 2 using succesor function
 
-endpoint = find_root_id(gbur,root); %initialise endpoint to root
+endpoint = find_node_id(gbur,root); %initialise endpoint to root
 root_child = successors(gbur,endpoint);
 
 if ~isempty(root_child)
