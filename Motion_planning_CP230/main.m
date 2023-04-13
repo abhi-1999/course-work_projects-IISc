@@ -33,9 +33,9 @@ for i = 1:max_iter
         GBur = generalised_bur(start,k,thr_hold,map);
         [nearest_point,nearest_point_idx]  =  findnearestpoint(GBur,goal);
         if turn == 1
-            GBur_satrt = bur_from_start(GBur_start,GBur);
+            GBur_satrt = addtobur(GBur_start,GBur);
         else
-            GBur_goal  = bur_from_goal(GBur_goal,GBur);
+            GBur_goal  = addtobur(GBur_goal,GBur);
 
         end
         if isempty(polyxpoly(map.obsx,map.obsx,[goal(1),nearest_point(1)],[goal(2),nearest_point(2)]))
