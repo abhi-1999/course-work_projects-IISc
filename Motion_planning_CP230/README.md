@@ -1,3 +1,7 @@
-#CP230 PROJECT
-MATLAB version used = R2023a
+# atrpo-rl-project
+
+Requirements:
+pyglet == 1.5.27
+gym == 0.21
+torch == 2.0.0
 

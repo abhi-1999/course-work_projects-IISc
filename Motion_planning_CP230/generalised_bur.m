@@ -2,7 +2,7 @@ function gbur = generalised_bur(start,k,thr_hold,map)
 
 root =start;
  
-N = 10;
+N = 100;
 
 dc = find_min_dist_to_obstacle(root,map); %select min distance to obstacle
 

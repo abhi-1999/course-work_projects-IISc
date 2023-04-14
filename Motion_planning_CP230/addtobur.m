@@ -34,7 +34,5 @@ for i=1:size(root_child,1)
         point_succ = successors(GBur,point_succ(1));
     end
 end
-
-
 end
 
