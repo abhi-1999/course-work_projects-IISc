@@ -7,8 +7,7 @@ ss_points=goal;
 
 
 flag = 0;
-plot(goal(1),goal(2),'g<');
-plot(nearest_point(1),nearest_point(2),'b*');
+
 for i =1:k
     new_point = ss_points(end,:);
     euc_dist = sqrt(sum((new_point - nearest_point).^2,2));

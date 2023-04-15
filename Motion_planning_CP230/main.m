@@ -8,7 +8,7 @@ clc
 map=map_definition();
 
 start=[0 0]; %start point
-goal = [800 800];
+goal = [100 100];
 
 k=5; % number of points along each spine
 thr_hold = 1;
@@ -47,8 +47,7 @@ for i = 1:max_iter
         if isempty(polyxpoly(map.obsx,map.obsx,[goal(1),nearest_point(1)],[goal(2),nearest_point(2)]))
             [flag,points_ss]=singlespinebur(map,goal,nearest_point,k,epsilon);
             if flag ==  1
-                %NEED TO CHANGE HERE
-                path(GBur,points_ss,nearest_point_idx); %plot the path 
+                path(GBur_start,GBur_goal,turn,points_ss,nearest_point_idx); %plot the path 
                 connected = 1;
             else
               [turn,start,goal] = swap(nearest_point,goal,turn); 
