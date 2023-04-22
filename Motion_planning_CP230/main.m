@@ -7,8 +7,8 @@ clc
 
 map=map_definition();
 
-start=[0 0]; %start point
-goal = [100 100];
+start=[10 0]; %start point
+goal = [200 100];
 
 k=5; % number of points along each spine
 thr_hold = 1;
@@ -37,13 +37,15 @@ for i = 1:max_iter
         
         if turn == 1
             GBur_start = addtobur(GBur_start,GBur);
-            %plot(GBur_start, 'XData', GBur_start.Nodes.XData, 'YData', GBur_start.Nodes.YData,'NodeColor','r','EdgeColor','k');
+            plot(GBur_start, 'XData', GBur_start.Nodes.XData, 'YData', GBur_start.Nodes.YData,'NodeColor','r','EdgeColor','k');
             [nearest_point,nearest_point_idx]  =  findnearestpoint(GBur_start,goal);
         else
             GBur_goal  = addtobur(GBur_goal,GBur);
-            %plot(GBur_goal,'XData',GBur_goal.Nodes.XData,'YData',GBur_goal.Nodes.YData,'NodeColor','blue','EdgeColor','g');
+            plot(GBur_goal,'XData',GBur_goal.Nodes.XData,'YData',GBur_goal.Nodes.YData,'NodeColor','blue','EdgeColor','g');
             [nearest_point,nearest_point_idx]  =  findnearestpoint(GBur_goal,goal);
         end
+
+
         if isempty(polyxpoly(map.obsx,map.obsx,[goal(1),nearest_point(1)],[goal(2),nearest_point(2)]))
             [flag,points_ss]=singlespinebur(map,goal,nearest_point,k,epsilon);
             if flag ==  1
