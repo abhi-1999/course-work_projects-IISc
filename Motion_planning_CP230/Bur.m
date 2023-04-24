@@ -70,13 +70,16 @@ end
 bur.Nodes.XData(1:n) = bur_points(:,1);
 bur.Nodes.YData(1:n) = bur_points(:,2);
 
+if bur.Nodes.XData(1) == bur.Nodes.XData(2) &&  bur.Nodes.YData(1) == bur.Nodes.YData(2)
+    disp("yes");
+end
 
 % Plot the graph
 
 %plot(bur, 'Layout', 'force', 'NodeColor', 'k', 'EdgeColor', 'k');
 %plot(bur,'Layout','force')
 
-plot(bur, 'XData', bur.Nodes.XData, 'YData', bur.Nodes.YData,'NodeColor','k','EdgeColor','k');
+
 
 
 %{

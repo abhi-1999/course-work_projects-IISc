@@ -30,7 +30,7 @@ map.yrange=[0 100];
 
 %Plot map
 figure;
-plot([0 30 30 0 0],[0 0 30 30 0]);
+plot([0 100 100 0 0],[0 0 100 100 0]);
 hold on
 
 % Fill polygons

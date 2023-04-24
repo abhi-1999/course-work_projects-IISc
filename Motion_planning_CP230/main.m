@@ -7,13 +7,17 @@ clc
 
 map=map_definition();
 
-start=[10 0]; %start point
-goal = [200 100];
+start=[0 0]; %start point
+goal = [20 15];
 
-k=5; % number of points along each spine
+plot(start(1),start(2),'r<');
+plot(goal(1),goal(2),'r>');
+
+k=100; % number of points along each spine
+N= 10; %number of spines or number of points on complete bubble
+max_iter = 100;
 thr_hold = 1;
 epsilon = 1;
-max_iter = 500;
 connected = 0;
 turn = 1;
 GBur_goal = digraph();
@@ -31,17 +35,17 @@ for i = 1:max_iter
     if connected == 1
         break;
     else
-        GBur = generalised_bur(start,k,thr_hold,map);
+        GBur = generalised_bur(start,k,N,thr_hold,map);
         
         
         
         if turn == 1
             GBur_start = addtobur(GBur_start,GBur);
-            plot(GBur_start, 'XData', GBur_start.Nodes.XData, 'YData', GBur_start.Nodes.YData,'NodeColor','r','EdgeColor','k');
+          
             [nearest_point,nearest_point_idx]  =  findnearestpoint(GBur_start,goal);
         else
             GBur_goal  = addtobur(GBur_goal,GBur);
-            plot(GBur_goal,'XData',GBur_goal.Nodes.XData,'YData',GBur_goal.Nodes.YData,'NodeColor','blue','EdgeColor','g');
+            
             [nearest_point,nearest_point_idx]  =  findnearestpoint(GBur_goal,goal);
         end
 
@@ -60,5 +64,5 @@ for i = 1:max_iter
     end
 end
 
-plot(GBur_start, 'XData', GBur_start.Nodes.XData, 'YData', GBur_start.Nodes.YData,'NodeColor','r','EdgeColor','k');
-plot(GBur_goal,'XData',GBur_goal.Nodes.XData,'YData',GBur_goal.Nodes.YData,'NodeColor','blue','EdgeColor','g');
+plot(GBur_start, 'XData', GBur_start.Nodes.XData, 'YData', GBur_start.Nodes.YData,'NodeColor','y','EdgeColor','k');
+plot(GBur_goal,'XData',GBur_goal.Nodes.XData,'YData',GBur_goal.Nodes.YData,'NodeColor','m','EdgeColor','g');
