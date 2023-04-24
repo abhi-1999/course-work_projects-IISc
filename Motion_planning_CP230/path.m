@@ -72,9 +72,13 @@ if turn == 1
     
     %store the data into the nodes added
     
-    j=numnodes(path_graph)+1;
+    j=e+1;
     for i = 1:size(node_data,1)
-        path_graph.Nodes.XData(j) = node_data.XData(i);
+        try
+            path_graph.Nodes.XData(j) = node_data.XData(i);
+        catch 
+            disp("here");
+        end
         path_graph.Nodes.YData(j) = node_data.YData(i);
         path_graph = addedge(path_graph,e,j);
         e = j;

@@ -24,13 +24,13 @@ map.obsy=obsy;
 
 
 %Define map range
-map.xrange=[0 100];
-map.yrange=[0 100];
+map.xrange=[0 30];
+map.yrange=[0 30];
 
 
 %Plot map
 figure;
-plot([0 100 100 0 0],[0 0 100 100 0]);
+plot([0 30 30 0 0],[0 0 30 30 0]);
 hold on
 
 % Fill polygons
