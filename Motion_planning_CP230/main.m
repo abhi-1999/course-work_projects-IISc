@@ -7,14 +7,14 @@ clc
 
 map=map_definition();
 
-start=[1 1]; %start point
-goal = [10 6];
+start=[5 1]; %start point
+goal = [8 6];
 
 plot(start(1),start(2),'r<');
 plot(goal(1),goal(2),'r>');
 
 k=300; % number of points along each spine
-N= 5; %number of spines or number of points on complete bubble
+N= 10; %number of spines or number of points on complete bubble
 max_iter = 100;
 thr_hold = 1;
 epsilon = 1;
@@ -35,30 +35,28 @@ for i = 1:max_iter
     if connected == 1
         break;
     else
-        GBur = generalised_bur(start,k,N,thr_hold,map);
-        
-        
-        
+        GBur = generalised_bur(start,k,N,thr_hold,map);        
         if turn == 1
             GBur_start = addtobur(GBur_start,GBur);
-           [nearest_point,nearest_point_idx]  =  findnearestpoint(GBur_start,goal);
-            close all
-            map=map_definition();
-            plot(GBur_start, 'XData', GBur_start.Nodes.XData, 'YData', GBur_start.Nodes.YData,'NodeColor','y','EdgeColor','k');
-            plot(GBur_goal,'XData',GBur_goal.Nodes.XData,'YData',GBur_goal.Nodes.YData,'NodeColor','m','EdgeColor','g');
+%             close all
+%             map=map_definition();
+%             plot(GBur_start, 'XData', GBur_start.Nodes.XData, 'YData', GBur_start.Nodes.YData,'NodeColor','y','EdgeColor','k');
+%             plot(GBur_goal,'XData',GBur_goal.Nodes.XData,'YData',GBur_goal.Nodes.YData,'NodeColor','m','EdgeColor','g');
+%             
+            [nearest_point,nearest_point_idx]  =  findnearestpoint(GBur_start,goal); 
         else
             GBur_goal  = addtobur(GBur_goal,GBur);
-            [nearest_point,nearest_point_idx]  =  findnearestpoint(GBur_goal,goal);
-            
-            close all
-            map=map_definition();
-            plot(GBur_start, 'XData', GBur_start.Nodes.XData, 'YData', GBur_start.Nodes.YData,'NodeColor','y','EdgeColor','k');
-            plot(GBur_goal,'XData',GBur_goal.Nodes.XData,'YData',GBur_goal.Nodes.YData,'NodeColor','m','EdgeColor','g');
+%             close all
+%             map=map_definition();
+%             plot(GBur_start, 'XData', GBur_start.Nodes.XData, 'YData', GBur_start.Nodes.YData,'NodeColor','y','EdgeColor','k');
+%             plot(GBur_goal,'XData',GBur_goal.Nodes.XData,'YData',GBur_goal.Nodes.YData,'NodeColor','m','EdgeColor','g');
+            [nearest_point,nearest_point_idx]  =  findnearestpoint(GBur_goal,goal);           
         end
 
 
-        if isempty(polyxpoly(map.obsx,map.obsx,[goal(1),nearest_point(1)],[goal(2),nearest_point(2)]))
-            [flag,points_ss]=singlespinebur(map,goal,nearest_point,k,epsilon);
+        if isempty(polyxpoly(map.obsx,map.obsy,[goal(1),nearest_point(1)],[goal(2),nearest_point(2)]))
+            
+            [flag,points_ss]=singlespinebur(map,goal,nearest_point,k,epsilon); %can change here i am dropping the spine 
             if flag ==  1
                 path(GBur_start,GBur_goal,turn,points_ss,nearest_point_idx); %plot the path 
                 connected = 1;

@@ -12,7 +12,7 @@ if turn == 1
             node_data(end+1,:)=GBur_start.Nodes(cur_par_id,:);
             pred_list=[pred_list;cur_par_id];
         else
-            break;
+            break
         end 
     end
     node_data = flip(node_data);
@@ -59,10 +59,10 @@ if turn == 1
             cur_par_id = parent(1);
             node_data(end+1,:) = GBur_goal.Nodes(cur_par_id,:);
         else
-            break;
+            break
         end 
     end
-    node_data = flip(node_data);
+    %node_data = flip(node_data);
     
     %remove the first element from above since it is already in path_graph
     node_data(1,:) =[];
