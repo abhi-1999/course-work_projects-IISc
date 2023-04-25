@@ -1,6 +1,6 @@
 function map =map_definition()
 
-map.Npoly=7; %Define number of polygons
+map.Npoly=9; %Define number of polygons
 
  map.poly{1}=[13,3; 15,3; 15,7; 13,7; 13,3];
  
@@ -12,10 +12,16 @@ map.Npoly=7; %Define number of polygons
 
  map.poly{4}=[15,5; 18,5; 18,7; 15,7; 15,5];
 
- map.poly{5} = [10,12; 12,14; 12,16;14,20; 10,12];
+ map.poly{5}=[6,13; 6,16; 12,16; 12,11; 6,13];
 
- map.poly{6} = [22,22; 24,25;15,24;22,22];
- map.poly{7} = [20,3;22,6; 26,8; 19,8;20,3];
+ map.poly{6}=[13,8.5; 13,15; 18,15; 18,8.5; 13,8.5];
+
+ map.poly{7}=[6,17; 6,21; 18,21; 18,17; 6,17];
+
+ map.poly{8}=[19,5; 19,13; 24,13; 24,5; 19,5];
+
+ map.poly{9}=[19,14; 19,21; 24,21; 24,14; 19,14];
+
  % merge vertices of all obstacle
 obsx=map.poly{1}(:,1).';
 obsy=map.poly{1}(:,2).';
@@ -28,13 +34,13 @@ map.obsy=obsy;
 
 
 %Define map range
-map.xrange=[0 30];
-map.yrange=[0 30];
+map.xrange=[3 25];
+map.yrange=[1 22];
 
 
 %Plot map
 figure;
-plot([0 30 30 0 0],[0 0 30 30 0]);
+plot([3 25 25 3 3],[1 1 22 22 1]);
 hold on
 
 % Fill polygons

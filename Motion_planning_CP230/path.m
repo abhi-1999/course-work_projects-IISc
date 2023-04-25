@@ -15,7 +15,9 @@ if turn == 1
             break
         end 
     end
-    node_data = flip(node_data);
+    if size(node_data,1) ~= 1
+        node_data = flip(node_data);
+    end
     pred_list = flip(pred_list);
    if size(points_ss,1) ~= 1
        points_ss = flip(points_ss);
@@ -27,7 +29,7 @@ if turn == 1
         path_graph = addedge(path_graph,i,i+1);
     end
     path_graph.Nodes = node_data;
-    %till above adds path from root of GBur_start to nearset point
+    
     
     
     %STEP2 ---> add the points from single spine (points_ss) to path_graph
@@ -98,12 +100,13 @@ else
             node_data(end+1,:) = GBur_start.Nodes(cur_node,:);
             pred_list = [pred_list; cur_node];
         else
-            break;
+            break
         end
     end
 
-
-    node_data = flip(node_data);
+    if size(node_data,1) ~= 1
+        node_data = flip(node_data);
+    end
     pred_list = flip(pred_list);
 
     points_ss(1,:) = [];
@@ -139,10 +142,14 @@ else
     cur_par_id=nearest_point_idx;
     node_data = GBur_goal.Nodes(cur_par_id,:);
     while true
-        parent = predecessors(GBur_start,cur_par_id);
+        try
+            parent = predecessors(GBur_goal,cur_par_id);
+        catch
+            disp("fvck");
+        end
         if ~isempty(parent)
             cur_par_id = parent(1);
-            node_data(end+1,:)=GBur_start.Nodes(cur_par_id,:);
+            node_data(end+1,:)=GBur_goal.Nodes(cur_par_id,:);
             pred_list=[pred_list;cur_par_id];
         else
             break;
