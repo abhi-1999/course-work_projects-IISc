@@ -1,6 +1,6 @@
 function map =map_definition()
 
-map.Npoly=4; %Define number of polygons
+map.Npoly=7; %Define number of polygons
 
  map.poly{1}=[13,3; 15,3; 15,7; 13,7; 13,3];
  
@@ -11,7 +11,11 @@ map.Npoly=4; %Define number of polygons
 
 
  map.poly{4}=[15,5; 18,5; 18,7; 15,7; 15,5];
- 
+
+ map.poly{5} = [10,12; 12,14; 12,16;14,20; 10,12];
+
+ map.poly{6} = [22,22; 24,25;15,24;22,22];
+ map.poly{7} = [20,3;22,6; 26,8; 19,8;20,3];
  % merge vertices of all obstacle
 obsx=map.poly{1}(:,1).';
 obsy=map.poly{1}(:,2).';

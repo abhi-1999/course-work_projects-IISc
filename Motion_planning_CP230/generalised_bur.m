@@ -1,11 +1,14 @@
-function gbur = generalised_bur(start,k,N,thr_hold,map)
+function [gbur,spine_flag,spine_point] = generalised_bur(goal,start,k,N,thr_hold,map)
 
 root =start;
- 
+ spine_flag = 0;
+ spine_point = [];
 
-dc = find_min_dist_to_obstacle(root,map); %select min distance to obstacle
+[dc,close_pt] = find_min_dist_to_obstacle(root,map); %select min distance to obstacle
 if dc < thr_hold
-    gbur = digraph();
+    spine_flag =  1;
+    gbur = RRT_bur(goal,root,close_pt,dc,map);
+    spine_point = [gbur.Nodes.XData(end) gbur.Nodes.YData(end)];
     return
 end
 
@@ -17,7 +20,7 @@ for i = 1:N % Iterate through all spines
         
         [node_id,node] = findEndpoint(gbur,root, i);    % Find endpoint of GBur in direction 
 
-        dc = find_min_dist_to_obstacle(node,map);
+        [dc,~] = find_min_dist_to_obstacle(node,map);
 
         if dc < thr_hold
             break; %RRT MODE
