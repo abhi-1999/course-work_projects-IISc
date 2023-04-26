@@ -89,12 +89,16 @@ if turn == 1
     
 
 else
-    %STEP1 --->make path from root of GBur_start to first point in point_ss
+    %STEP1 --->make path from root of GBur_start to first point in point_ss 
     cur_node = find_node_id(GBur_start,points_ss(1,:)); %first point in points_ss will be the goal 
     node_data = GBur_start.Nodes(cur_node,:);
     pred_list = cur_node;
     while true
-        parent = predecessors(GBur_start,cur_node);
+        try
+            parent = predecessors(GBur_start,cur_node);
+        catch
+            disp("wtf");
+        end
         if ~isempty(parent)
             cur_node = parent(1);
             node_data(end+1,:) = GBur_start.Nodes(cur_node,:);
@@ -103,13 +107,15 @@ else
             break
         end
     end
-
     if size(node_data,1) ~= 1
         node_data = flip(node_data);
     end
     pred_list = flip(pred_list);
-
-    points_ss(1,:) = [];
+    try
+        points_ss(1,:) = [];
+    catch
+        disp("cmon");
+    end
 
     path_graph = digraph();
     path_graph = addnode(path_graph,size(pred_list,1));
@@ -170,6 +176,17 @@ else
     end
 end
 %PLOT
-    
-    plot(path_graph,'XData',path_graph.Nodes.XData,'YData',path_graph.Nodes.YData,'NodeColor','k','EdgeColor','r');
+    source = find_node_id(path_graph,[GBur_start.Nodes.XData(1) GBur_start.Nodes.YData(1)]);
+    target = find_node_id(path_graph,[GBur_goal.Nodes.XData(1) GBur_goal.Nodes.YData(1)]);
+    target = target(1);
+    sht_path = shortestpath(path_graph,source,target);
+
+    lightBlue = [91, 207, 244] / 255;
+    burlywood = [222,184,135] /255;
+    darkmagenta = [139,0,139] /255;
+    chartreuse = [0,255,0] /255;
+    plot(GBur_start, 'XData', GBur_start.Nodes.XData, 'YData', GBur_start.Nodes.YData,'NodeColor',darkmagenta,'EdgeColor',darkmagenta);
+    plot(GBur_goal,'XData',GBur_goal.Nodes.XData,'YData',GBur_goal.Nodes.YData,'NodeColor','r','EdgeColor','r');
+    p = plot(path_graph,'XData',path_graph.Nodes.XData,'YData',path_graph.Nodes.YData);
+    highlight(p,sht_path,'LineWidth', 2, 'EdgeColor', chartreuse);
 end

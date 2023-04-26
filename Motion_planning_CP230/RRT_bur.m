@@ -1,4 +1,4 @@
-function rrt_bur = RRT_bur(goal,root,close_pt,dc,map)
+function rrt_bur = RRT_bur(goal,root,close_pt,dc,map,rrt_limit)
     %STEP1 ---> find the unit vector at root perpendicular to line joinin
                 %root and close_point
     
@@ -27,40 +27,45 @@ function rrt_bur = RRT_bur(goal,root,close_pt,dc,map)
         move = 1;
         rrt_points = p1;
     end
+    count = 0;
     %STEP3 ---> sample points along move till dc<0 or we get a greater dc
-    if move == 1
-        while true 
-            [d,d_point] = find_min_dist_to_obstacle(rrt_points(end,:),map);
-    
-            if d == 0 || d > dc
-                break
-            else
-                perp_unit_vec = perpendicular_vector(rrt_points(end,:),d_point);
-                new_point = rrt_points(end,:) + perp_unit_vec *dc;
-                if dot(new_point - rrt_points(end,:),perp_unit_vec) < 0  %this means new_point is in left 
-                    perp_unit_vec = -perp_unit_vec;
-                    new_point = rrt_points(end,:) + perp_unit_vec*dc;
+    while count < rrt_limit
+        if move == 1
+            while true 
+                [d,d_point] = find_min_dist_to_obstacle(rrt_points(end,:),map);
+        
+                if d == 0 || d > dc
+                    break
+                else
+                    perp_unit_vec = perpendicular_vector(rrt_points(end,:),d_point);
+                    new_point = rrt_points(end,:) + perp_unit_vec *dc;
+                    if dot(new_point - rrt_points(end,:),perp_unit_vec) < 0  %this means new_point is in left 
+                        perp_unit_vec = -perp_unit_vec;
+                        new_point = rrt_points(end,:) + perp_unit_vec*dc;
+                    end
+                    rrt_points=[rrt_points;new_point];
                 end
-                rrt_points=[rrt_points;new_point];
+            end
+           
+        else
+            while true
+                [d,d_point] = find_min_dist_to_obstacle(rrt_points(end,:),map);
+        
+                if d == 0 || d > dc
+                    break
+                else
+                    perp_unit_vec = perpendicular_vector(rrt_points(end,:),d_point);
+                    new_point = rrt_points(end,:) + perp_unit_vec *dc;
+                    if dot(new_point - rrt_points(end,:),perp_unit_vec) > 0  %this means new_point is in right 
+                        perp_unit_vec = -perp_unit_vec;
+                        new_point = rrt_points(end,:) + perp_unit_vec*dc;
+                    end
+                    rrt_points=[rrt_points;new_point];
+                end
             end
         end
-       
-    else
-        while true
-            [d,d_point] = find_min_dist_to_obstacle(rrt_points(end,:),map);
-    
-            if d == 0 || d > dc
-                break
-            else
-                perp_unit_vec = perpendicular_vector(rrt_points(end,:),d_point);
-                new_point = rrt_points(end,:) + perp_unit_vec *dc;
-                if dot(new_point - rrt_points(end,:),perp_unit_vec) > 0  %this means new_point is in right 
-                    perp_unit_vec = -perp_unit_vec;
-                    new_point = rrt_points(end,:) + perp_unit_vec*dc;
-                end
-                rrt_points=[rrt_points;new_point];
-            end
-        end
+
+        count =count+1;
     end
     rrt_points = [root;rrt_points];
 

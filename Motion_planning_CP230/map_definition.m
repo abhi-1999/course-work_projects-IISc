@@ -44,9 +44,9 @@ plot([3 25 25 3 3],[1 1 22 22 1]);
 hold on
 
 % Fill polygons
-
+peachpuff = [255,218,185] /255;
 for i=1:map.Npoly    
-    fill(map.poly{i}(:,1),map.poly{i}(:,2),'r')
+    fill(map.poly{i}(:,1),map.poly{i}(:,2),'k');
 end
 
 
