@@ -1,8 +1,6 @@
 function [gbur,spine_flag,spine_point] = generalised_bur(goal,start,k,N,thr_hold,map,rrt_limit)
-if isnan(start(1)) 
-    disp("shit");
-end
-root =start;
+
+ root =start;
  spine_flag = 0;
  spine_point = [];
 
@@ -13,9 +11,7 @@ if dc < thr_hold
     spine_point = [gbur.Nodes.XData(end) gbur.Nodes.YData(end)];
     return
 end
-if dc == inf
-    disp("shit");
-end
+
 gbur = Bur(root,dc,map,N);%  Initialize GBur to Bur
 
 for i = 1:N % Iterate through all spines

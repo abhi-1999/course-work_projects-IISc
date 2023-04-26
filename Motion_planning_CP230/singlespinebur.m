@@ -18,8 +18,8 @@ for i =1:k
             return
         else
             ss_points(end,:) = [];
-            plot(ss_points(end,1),ss_points(end,2),'r>');
-            plot([ss_points(end,1) nearest_point(1)],[ss_points(end,2) nearest_point(2)],'g');        
+%             plot(ss_points(end,1),ss_points(end,2),'r>');
+%             plot([ss_points(end,1) nearest_point(1)],[ss_points(end,2) nearest_point(2)],'g');        
             flag = 1;
             return
         

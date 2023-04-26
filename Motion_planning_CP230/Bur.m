@@ -62,11 +62,6 @@ end
 % Set the positions of the nodes based on their coordinates in bur_points
 
 
-% for i=1:n
-%     bur.Nodes.XData(i) = bur_points(i,1);
-%     bur.Nodes.YData(i) = bur_points(i,2);
-% end
-
 bur.Nodes.XData(1:n) = bur_points(:,1);
 bur.Nodes.YData(1:n) = bur_points(:,2);
 
@@ -74,29 +69,6 @@ if bur.Nodes.XData(1) == bur.Nodes.XData(2) &&  bur.Nodes.YData(1) == bur.Nodes.
     disp("yes");
 end
 
-% Plot the graph
+% plot(bur,'XData',bur.Nodes.XData,'YData',bur.Nodes.YData,'NodeColor','k','EdgeColor','k');
+end
 
-%plot(bur, 'Layout', 'force', 'NodeColor', 'k', 'EdgeColor', 'k');
-%plot(bur,'Layout','force')
-
-
-
-
-%{
-%STEP3 ---> from the bur_points make a bur(which is a tree) such that first
-            %point i.e q is root and the remaining are non root
-root = bur_points(1,:);
-edge_list = bur_points(2:end,:);
-n = size(edge_list, 1);
-bur = graph(ones(n, 1), (2:n+1)', 'OmitSelfLoops');
-
-%{
-edge_idx = findedge(bur, ones(n,1), (2:n+1)');
-bur = rmedge(bur, edge_idx(2:2:end)); % Remove alternate edges
-disp(bur);
-%}
-
-
-%STEP 4 ----> Plot Bur
-plot(bur, 'XData', [root(1); edge_list(:, 1)], 'YData', [root(2); edge_list(:, 2)],'NodeColor','k','EdgeColor','k');
-%}

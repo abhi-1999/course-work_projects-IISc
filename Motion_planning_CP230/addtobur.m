@@ -27,7 +27,11 @@ else
     for i=1:size(root_child,1)
         next_point = [GBur.Nodes.XData(root_child(i)) GBur.Nodes.YData(root_child(i))];
         next_point_id = find_node_id(newbur,next_point);
-        newbur = addedge(newbur,root_id,next_point_id);
+        try
+            newbur = addedge(newbur,root_id,next_point_id);
+        catch
+            disp("f");
+        end
         point_succ = successors(GBur,root_child(i));
         while ~isempty(point_succ)
             curr_point_id  = next_point_id;
