@@ -76,11 +76,7 @@ if turn == 1
     
     j=e+1;
     for i = 1:size(node_data,1)
-        try
-            path_graph.Nodes.XData(j) = node_data.XData(i);
-        catch 
-            disp("here");
-        end
+        path_graph.Nodes.XData(j) = node_data.XData(i);
         path_graph.Nodes.YData(j) = node_data.YData(i);
         path_graph = addedge(path_graph,e,j);
         e = j;

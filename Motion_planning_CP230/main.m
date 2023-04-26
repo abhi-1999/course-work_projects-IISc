@@ -1,7 +1,14 @@
 %% For a point robot
-clear
+
+ocd = 100;
+time_array = zeros(1,ocd);
+o=0;
+tic;
+while o < ocd
+disp(o);
 close all
-clc
+
+
 
 
 
@@ -32,13 +39,12 @@ GBur_start = addnode(GBur_start,1);
 GBur_start.Nodes.XData(1) = start(1);
 GBur_start.Nodes.YData(1) = start(2);
 
-% ocd = 100;
-% o=0;
-% while o < ocd
-% disp(o);
+
+
 for i = 1:max_iter
-    disp(i);
+%     disp(i);
     if connected == 1
+        time_array(i) = toc;
         break
     else
         [GBur,ss_flag,last_point_in_ss] = generalised_bur(goal,start,k,N,thr_hold,map,rrt_limit);  
@@ -85,8 +91,14 @@ for i = 1:max_iter
         end
     end
 end
-% o=o+1;
-% end
+o=o+1;
+end
+
+plot(time_array);
+xlabel('Iteration');
+ylabel('Execution Time (s)');
+title('Execution Time vs Iteration');
+
 
 % plot(GBur_start, 'XData', GBur_start.Nodes.XData, 'YData', GBur_start.Nodes.YData,'NodeColor','y','EdgeColor','');
 % plot(GBur_goal,'XData',GBur_goal.Nodes.XData,'YData',GBur_goal.Nodes.YData,'NodeColor','m','EdgeColor','g');
